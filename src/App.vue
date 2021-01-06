@@ -1,29 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav"><router-link to="/">Home</router-link> |</div>
+    <!-- Title -->
+    <h1 class="text-center my-10 font-semibold text-6xl">
+      <span class="text-green-500">Vue&nbsp;</span>
+      Access
+    </h1>
+    <p class="text-center">
+      A VueJS plugin to manage user roles and access across your system.
+    </p>
+    <!-- Navs -->
+    <div id="container mx-auto">
+      <div class="flex justify-evenly mt-20 mb-10">
+        <router-link class="btn" to="/">Demo-1</router-link>
+        <router-link class="btn" to="/">Demo-2</router-link>
+        <router-link class="btn" to="/">Demo-3</router-link>
+      </div>
+    </div>
     <router-view />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style></style>

@@ -1,0 +1,3 @@
+.v-access-disabled {
+  @apply border-gray-800 bg-gray-400 text-gray-800 !important;
+}
