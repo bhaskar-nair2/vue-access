@@ -1,6 +1,6 @@
 # Vue-Access
 
-## Useage
+## Installation
 
 In your `main.js` file
 
@@ -19,6 +19,26 @@ Aditionally, you get the default styles that Vue-Access provides for initial set
 ```js
 import "@/styles/access-styles.css";
 ```
+
+## Useage
+
+You can add the `v-access` directive with the associated binding to any component as shown under. Every binding has a unique functionality.
+
+```html
+<input type="button" @click="someFunction" v-access:action="'buttonAccess'" />
+
+<div v-access:comp="'imgAccess'">
+  <img src="https://picsum.photos/id/237/200/300" />
+</div>
+
+<div v-access:auth>
+  <img src="https://picsum.photos/id/237/200/300" />
+</div>
+```
+
+Please notice the extra `''` surrounding each value
+
+> Does not work on `<template>` tags
 
 ## User Setup
 
@@ -51,11 +71,16 @@ export const state = {
 
 By default the store will only have the `all` object in the permission. We have added the `dashboard` object just to explain the concept better.
 
-- `roleName`: Used to store the name of the given role. Can be empty
-- `currentEntity`: Used to define the current entity/page the user is on.
-- `permissions`: The permissions object this the primary focus here as it defines the access given to the user. The permissions are divided by entities. Think of entities to be pages like _Dashboard_ or _Profile_ etc. Tho, for smaller applications it makes more sense to have a single parent then divide it into entities.
-  - `all`: Used when one needs to store all the user permissions under a single entity, ideal for smaller applications OR grouped permissions.
-  - `entity`: The entity name (like `dashboard` in this case) under which various permissions are nested. We can have multiple entities like this. Imagine `settings`, `bookings`, `invoices`, etc.
+- `roleName`
+  : Used to store the name of the given role. Can be empty
+- `currentEntity`
+  : Used to define the current entity/page the user is on.
+- `permissions`
+  : The permissions object this the primary focus here as it defines the access given to the user. The permissions are divided by entities. Think of entities to be pages like _Dashboard_ or _Profile_ etc. Tho, for smaller applications it makes more sense to have a single parent then divide it into entities.
+  - `all`
+    : Used when one needs to store all the user permissions under a single entity, ideal for smaller applications OR grouped permissions.
+  - `entity`
+    : The entity name (like `dashboard` in this case) under which various permissions are nested. We can have multiple entities like this. Imagine `settings`, `bookings`, `invoices`, etc.
 
 If you wish to use v-access with multiple entities you will need to set `entityBased = true` when regestring in the `main.js` file.
 

@@ -48,6 +48,14 @@ const Access = {
             el.style.display = "none";
           }
           break;
+        case "auth":
+          allowed = accessState.auth;
+          if (!allowed) {
+            el.disabled = "disabled";
+            el.className += " " + "disabled";
+            el.style.display = "none";
+          }
+          break;
       }
     };
 
