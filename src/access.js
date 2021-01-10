@@ -28,35 +28,41 @@ const Access = {
         case "acts":
           allowed = permission.action.includes(accessId);
           if (!allowed) {
-            el.readonly = true;
-            el.className += " " + utils.disabledClass;
+            el.className += " " + classes.actionClass;
           }
           break;
         case "components":
         case "comp":
           allowed = permission.comp.includes(accessId);
-          console.log(allowed);
           if (!allowed) {
-            el.style.display = "none";
+            el.className += " " + classes.componentClass;
+            // el.style.display = "none";
           }
           break;
+        // ! Should block rendering of the given component, no classes
         case "view":
           allowed = permission.view.includes(accessId);
           if (!allowed) {
-            el.disabled = "disabled";
-            el.className += " " + "disabled";
-            el.style.display = "none";
+            el.innerHTML = "";
+            el.outerHTML = "";
           }
           break;
         case "auth":
           allowed = accessState.auth;
           if (!allowed) {
-            el.disabled = "disabled";
-            el.className += " " + "disabled";
-            el.style.display = "none";
+            el.className += " " + classes.authClass;
+            // el.disabled = "disabled";
+            // el.className += " " + "disabled";
+            // el.style.display = "none";
           }
           break;
       }
+    };
+
+    const classes = {
+      actionClass: "v-access-disabled-action",
+      componentClass: "v-access-disabled-component",
+      authClass: "v-access-disabled-auth",
     };
 
     // takes the unique access string and checks with the roles value
@@ -66,7 +72,6 @@ const Access = {
     });
 
     const utils = {
-      disabledClass: "v-access-disabled",
       failFunc: function() {
         // store.dispatch("notific/errorMan", { type: "access" });
       },
