@@ -182,6 +182,7 @@ Vue.use(access, {
 - Define custom class for a component
 - Block the original function of a blocked `action` element.
 - Define a way to execute specific function if the user clicks a blocked `action` element (Perhaps to show a notification?). Should block the original function.
+- Finish website with examples. (Does anyone know how to make those editable code windows?)
 
 ## Like this library
 
