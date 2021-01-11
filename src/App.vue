@@ -11,13 +11,38 @@
     <!-- Navs -->
     <div id="container mx-auto">
       <div class="flex justify-evenly mt-20 mb-10">
-        <router-link class="btn" to="/">Demo-1</router-link>
-        <router-link class="btn" to="/">Demo-2</router-link>
-        <router-link class="btn" to="/">Demo-3</router-link>
+        <router-link
+          active-class="border-b-4 border-purple-600"
+          exact-active-class
+          class="btn text-purple-500 bg-purple-100"
+          to="/"
+          >Actions</router-link
+        >
+        <router-link
+          active-class="border-b-4 border-purple-600"
+          exact-active-class
+          class="btn text-purple-500 bg-purple-100"
+          to="/components"
+          >Components</router-link
+        >
+        <router-link
+          active-class="border-b-4 border-purple-600"
+          exact-active-class
+          class="btn text-purple-500 bg-purple-100"
+          to="/views"
+          >Views</router-link
+        >
       </div>
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+  methods: {},
+};
+</script>
 
 <style></style>

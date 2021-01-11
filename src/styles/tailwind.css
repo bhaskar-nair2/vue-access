@@ -8,10 +8,14 @@
 }
 
 .btn {
-  @apply text-purple-500 bg-purple-100 rounded-xl py-2 px-4 font-bold;
+  @apply rounded-xl py-2 px-4 font-bold;
 }
 
 .sample-box {
-  @apply flex justify-center align-middle border-4 rounded-xl text-center h-40 w-40 my-auto items-center;
+  @apply flex justify-center align-middle border-4 rounded-xl text-center h-52 w-52 my-auto items-center border-red-200 overflow-hidden;
   @apply font-bold antialiased;
+}
+
+.small-code {
+  @apply text-xs text-gray-400 mt-2;
 }

@@ -7,9 +7,9 @@ export const state = {
   auth: false,
   permissions: {
     all: {
-      view: [],
+      view: ["view"],
       comp: ["textAccess", "imgAccess", "buttonAccess"],
-      action: ["editAccess", "deleteAccess"],
+      action: ["editAccess"],
     },
     home: {
       view: [],

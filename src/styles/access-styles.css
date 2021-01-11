@@ -1,3 +1,13 @@
-.v-access-disabled {
-  @apply border-gray-800 bg-gray-400 text-gray-800 !important;
+.v-access-disabled-action {
+  pointer-events: none;
+  color: #505050;
+  background-color: #808080;
+}
+
+.v-access-disabled-component {
+  display: none;
+}
+
+.v-access-disabled-auth {
+  display: none;
 }
