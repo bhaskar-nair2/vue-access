@@ -3,7 +3,7 @@ import * as shvl from "shvl";
 import * as accessStore from "@/store/accessStore.js";
 
 const Access = {
-  install: function(Vue, { store, entityBased = false }) {
+  install: function(Vue, { store, entityBased = false, overrideClasses = {} }) {
     if (!store) {
       throw new Error("Please provide vuex store.");
     }
@@ -12,13 +12,19 @@ const Access = {
 
     const accessState = store.state.access;
 
+    const classes = {
+      actionClass: overrideClasses.actionClass || "v-access-disabled-action",
+      componentClass:
+        overrideClasses.componentClass || "v-access-disabled-component",
+      authClass: overrideClasses.authClass || "v-access-disabled-auth",
+    };
+
     // * Main Function for `access` directive
     const accessValidator = function(el, binding) {
       let entity = entityBased ? accessState.currentEntity : "all";
       let type = binding.arg;
       let accessId = binding.value;
-
-      console.log(el);
+      const { invert } = binding.modifiers;
 
       const permission = shvl.get(accessState, `permissions.${entity}`);
       let allowed = false;
@@ -36,7 +42,6 @@ const Access = {
           allowed = permission.comp.includes(accessId);
           if (!allowed) {
             el.className += " " + classes.componentClass;
-            // el.style.display = "none";
           }
           break;
         // ! Should block rendering of the given component, no classes
@@ -49,20 +54,13 @@ const Access = {
           break;
         case "auth":
           allowed = accessState.auth;
-          if (!allowed) {
+          if (!allowed && !invert) {
             el.className += " " + classes.authClass;
-            // el.disabled = "disabled";
-            // el.className += " " + "disabled";
-            // el.style.display = "none";
+          } else if (allowed && invert) {
+            el.className += " " + classes.authClass;
           }
           break;
       }
-    };
-
-    const classes = {
-      actionClass: "v-access-disabled-action",
-      componentClass: "v-access-disabled-component",
-      authClass: "v-access-disabled-auth",
     };
 
     // takes the unique access string and checks with the roles value
@@ -78,32 +76,16 @@ const Access = {
       passFunc: function() {},
     };
 
-    Vue.directive("global-access", {
-      update(el, binding) {
-        var accessVals = {}; // user.state.role;
-        let access = accessVals.find((acc) => acc.entity == "global");
-        let type = binding.arg;
-        // Action Comp Tabs Route
-        switch (type) {
-          case "actions":
-          case "acts":
-            if (!access.acts.includes(binding.value)) {
-              el.readonly = true;
-              el.className += " " + utils.failClass;
-              el.disabled = true;
-            }
-            break;
-        }
-      },
-    });
-
+    // TODO
+    // Set class for the particular entity
     Vue.directive("access-class", {
       bind(el, binding) {
-        if (binding.arg == "fail") utils.failClass = binding.value;
+        classes.actionClass = binding.value;
       },
     });
 
-    // emits function if access fails, not implimented
+    // TODO
+    // Emit function if interacted with even tho access is false
     Vue.directive("access-func", {
       bind(el, binding) {
         if (typeof binding.value !== "function") {
@@ -124,6 +106,8 @@ const Access = {
       store.dispatch("access/setAuthState", authState);
     };
     Vue.prototype.$setCurrentEntity = function(entityName) {
+      if (entityBased === false)
+        console.warn("Settting entity while entityBased is false: vue access");
       store.dispatch("access/setCurrentEntity", entityName);
     };
     Vue.prototype.$addEntity = function(entityData) {

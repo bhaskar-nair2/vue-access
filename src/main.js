@@ -8,7 +8,16 @@ import "@/styles/access-styles.css";
 
 import access from "./access";
 
-Vue.use(access, { store, router });
+Vue.use(access, {
+  store,
+  router,
+  entityBased: false,
+  overrideClasses: {
+    actionClass: "v-access-disabled-action",
+    componentClass: "v-access-disabled-component",
+    authClass: "v-access-disabled-auth",
+  },
+});
 
 Vue.config.productionTip = false;
 
